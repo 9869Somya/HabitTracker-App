@@ -1,0 +1,26 @@
+.habit-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.habit-info {
+  margin-bottom: 10px;
+}
+
+.habit-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.habit-actions button {
+  padding: 5px 10px;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.habit-actions button:hover {
+  background-color: #f0f0f0;
+}
