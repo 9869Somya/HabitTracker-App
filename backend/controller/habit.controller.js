@@ -216,12 +216,12 @@ function calculateStreakLogs(streakLogs, startDate, frequency) {
 
       if (missedCount > 0) {
         const daysToAdd = frequency - doneCount;
-        console.log(daysToAdd);
+        // console.log(daysToAdd);
         for (let j = 1; j <= daysToAdd; j++) {
           // console.log(startDateObj);
           const date = new Date(startDateObj);
           date.setDate(startDateObj.getDate() + i + j);
-          console.log(date);
+          // console.log(date);
           // console.log(i);
           // console.log(j);
 
