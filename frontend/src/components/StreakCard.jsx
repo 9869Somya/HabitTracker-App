@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const StreakCard = ({ streak, habitId }) => {
@@ -11,9 +11,9 @@ const StreakCard = ({ streak, habitId }) => {
       );
       const data = response.data;
       if (response.status === 200) {
-        setStatus("Done"); // Update status locally
+        setStatus("Done");
       } else {
-        alert(data.message); // Display error message if update fails
+        alert(data.message);
       }
     } catch (error) {
       console.error("Error:", error);
@@ -23,6 +23,7 @@ const StreakCard = ({ streak, habitId }) => {
 
   const isToday = (date) => {
     const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
     const streakDate = new Date(date);
     return (
       streakDate.getDate() === today.getDate() &&
