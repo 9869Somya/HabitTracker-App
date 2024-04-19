@@ -161,22 +161,11 @@ async function getStreakLogsById(req, res) {
     if (!habit) {
       return res.status(404).json({ message: "Habit not found" });
     }
-
-    // Calculate streak logs with additional days based on streak consistency
-    // const streakLogs = calculateStreakLogs(
-    //   habit.streakLogs,
-    //   habit.startDate,
-    //   habit.frequency
-    // );
-
-    // res.status(200).json({ streakLogs });
     const updatedStreakLogs = calculateStreakLogs(
       habit.streakLogs,
       habit.startDate,
       habit.frequency
     );
-
-    // Update the streak logs of the habit
     habit.streakLogs = updatedStreakLogs;
     await habit.save();
 
@@ -216,14 +205,9 @@ function calculateStreakLogs(streakLogs, startDate, frequency) {
 
       if (missedCount > 0) {
         const daysToAdd = frequency - doneCount;
-        // console.log(daysToAdd);
         for (let j = 1; j <= daysToAdd; j++) {
-          // console.log(startDateObj);
           const date = new Date(startDateObj);
           date.setDate(startDateObj.getDate() + i + j);
-          // console.log(date);
-          // console.log(i);
-          // console.log(j);
 
           const standardizedDate = date.toISOString().split("T")[0];
           const existingDateIndex = streakLogs.findIndex(
