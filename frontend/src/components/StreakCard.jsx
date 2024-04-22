@@ -34,8 +34,8 @@ const StreakCard = ({ streak, habitId }) => {
 
   return (
     <div className="card">
-      <h3>Date: {streak.date}</h3>
-      <p>Status: {status}</p>
+      <h3>{streak.date}</h3>
+      <p>{status}</p>
       {status !== "Done" && status !== "Missed" && isToday(streak.date) && (
         <button className="button" onClick={updateStatus}>
           Mark as Done
