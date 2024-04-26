@@ -92,49 +92,36 @@ async function getHabitById(req, res) {
 
 async function updateHabit(req, res) {
   const { habitId } = req.params;
-  const { name, startDate, frequency } = req.body;
+  const { frequency } = req.body;
   try {
     let habit = await Habit.findById(habitId);
     if (!habit) {
       return res.status(404).json({ message: "Habit not found" });
     }
-    habit.name = name;
-    habit.startDate = startDate;
+
+    const additionalFrequency = frequency - habit.frequency;
+
     habit.frequency = frequency;
-    habit.streakLogs = [];
 
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    habit.compensatedDates = [];
-    const startDa = new Date(habit.startDate);
-    startDa.setUTCHours(0, 0, 0, 0);
+    const lastStreakLogDate =
+      habit.streakLogs[habit.streakLogs.length - 1].date;
+    const lastStreakLogDateTime = new Date(lastStreakLogDate).getTime();
 
-    let missedLogsCount = 0;
-
-    for (let k = 1; k <= habit.frequency; k++) {
-      const date = new Date(startDa);
-      date.setDate(date.getDate() + k - 1);
-      const standardizedDate = date.toISOString().split("T")[0];
-      const status = k <= missedLogsCount ? "Missed" : "Not done";
-      habit.streakLogs.push({ date: standardizedDate, status });
-    }
-
-    for (let j = 0; j < habit.streakLogs.length; j++) {
-      const logDate = new Date(habit.streakLogs[j].date);
-      if (logDate < today) {
-        habit.streakLogs[j].status = "Missed";
-        missedLogsCount++;
-        const missedDate = logDate.toISOString().split("T")[0];
-        if (!habit.compensatedDates.includes(missedDate)) {
-          compensateMissedDate(habit, missedDate, today);
-          habit.compensatedDates.push(missedDate);
-        }
-      }
+    for (let i = 1; i <= additionalFrequency; i++) {
+      const nextStreakLogDate = new Date(
+        lastStreakLogDateTime + i * 24 * 60 * 60 * 1000
+      );
+      const standardizedDate = nextStreakLogDate.toISOString().split("T")[0];
+      habit.streakLogs.push({ date: standardizedDate, status: "Not done" });
     }
 
     await habit.save();
 
-    res.status(200).json({ message: "Habit updated successfully", habit });
+    res
+      .status(200)
+      .json({ message: "Habit frequency updated successfully", habit });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: error.message });
@@ -246,6 +233,20 @@ async function getHabitStatusByDate(req, res) {
     res.status(500).json({ message: "Internal Server Error" });
   }
 }
+async function getFrequencyById(req, res) {
+  try {
+    const { habitId } = req.params;
+    const habit = await Habit.findById(habitId);
+    if (habit) {
+      res.status(200).json({ frequency: habit.frequency });
+    } else {
+      res.status(404).json({ message: "Habit not found" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 //triggered only when the user clicked on the checkbox to update the status
 async function updateStreakStatus(req, res) {
@@ -284,5 +285,6 @@ module.exports = {
   deleteHabit,
   getStreakLogsById,
   getHabitStatusByDate,
+  getFrequencyById,
   updateStreakStatus,
 };

@@ -8,6 +8,7 @@ const {
   deleteHabit,
   getStreakLogsById,
   getHabitStatusByDate,
+  getFrequencyById,
   updateStreakStatus,
 } = require("../controller/habit.controller");
 
@@ -19,6 +20,7 @@ habitRouter.put("/:habitId", updateHabit);
 habitRouter.delete("/:habitId", deleteHabit);
 habitRouter.get("/streakLogs/:habitId", getStreakLogsById);
 habitRouter.get("/streakLogs/:habitId/:date", getHabitStatusByDate);
+habitRouter.get("/frequency/:habitId", getFrequencyById);
 habitRouter.put("/streakLogs/:habitId/:date", updateStreakStatus);
 
 module.exports = habitRouter;
