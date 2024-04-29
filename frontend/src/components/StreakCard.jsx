@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import formatDate from "../Utils/helperFunction";
 
 const StreakCard = ({ streak, habitId }) => {
   const [status, setStatus] = useState(streak.status);
@@ -39,17 +40,26 @@ const StreakCard = ({ streak, habitId }) => {
       backgroundColor = "green";
       break;
     case "Missed":
-      backgroundColor = "orange";
+      backgroundColor = "red";
       break;
     default:
-      backgroundColor = "red";
+      backgroundColor = "orange";
   }
 
   return (
-    <div className="card">
-      <h3>{streak.date}</h3>
+    <div className="card" id="streak-card">
+      <h3 style={{ marginBottom: "30px" }}>{formatDate(streak.date)}</h3>
       <p>
-        <span style={{ backgroundColor, color: textColor, padding: "2px 5px", borderRadius: "3px" }}>{status}</span>
+        <span
+          style={{
+            backgroundColor,
+            color: textColor,
+            padding: "10px 10px",
+            borderRadius: "3px",
+          }}
+        >
+          {status}
+        </span>
       </p>
       {status !== "Done" && status !== "Missed" && isToday(streak.date) && (
         <button className="button" onClick={updateStatus}>

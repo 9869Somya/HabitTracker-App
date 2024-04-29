@@ -21,8 +21,11 @@ const StreakDetails = () => {
 
   return (
     <div className="container">
-      <h1 className="text-center mt-5 mb-4" >
-        Make today count with daily habits
+      <h1
+        className="text-center mt-5 mb-4"
+        style={{ color: "153448", fontFamily: "initial", fontSize: "60px" }}
+      >
+        Make today count with Daily Habits !!
       </h1>
       <div className="row">
         {streaks.map((streak) => (

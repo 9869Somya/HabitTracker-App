@@ -155,7 +155,10 @@ const AddShowHabits = () => {
   );
 
   return (
-    <div className="container" style={{ minHeight: "100vh", padding: "20px", color: "black"}}>
+    <div
+      className="container"
+      style={{ minHeight: "100vh", padding: "20px", color: "black" }}
+    >
       <div className="row">
         <div className="col-md-6">
           <input
@@ -164,7 +167,11 @@ const AddShowHabits = () => {
             value={searchTerm}
             onChange={handleSearch}
             className="form-control"
-            style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
+            style={{
+              background: "rgba(255, 255, 255, 0.8)",
+              color: "black",
+              border: "2px solid white",
+            }}
           />
         </div>
         <div className="col-md-6 text-right">
@@ -172,11 +179,17 @@ const AddShowHabits = () => {
             value={selectedMonth}
             onChange={handleMonthChange}
             className="form-control"
-            style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
+            style={{
+              background: "rgba(255, 255, 255, 0.8)",
+              color: "black",
+              border: "2px solid white",
+            }}
           >
             <option value="">All Months</option>
             {monthOptions.map((month) => (
-              <option key={month.value} value={month.value}>{month.label}</option>
+              <option key={month.value} value={month.value}>
+                {month.label}
+              </option>
             ))}
           </select>
         </div>
@@ -184,10 +197,18 @@ const AddShowHabits = () => {
 
       <div className="row mt-4">
         <div className="col-md-6">
-          <div className="card" id="habit_form" style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}>
+          <div
+            className="card"
+            id="habit_form"
+            style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+          >
             <div className="card-body">
-              <h3 className="text-center my-2" style={{ color: "white" }}>Add Habit</h3>
-              <p className="text-center" style={{ color: "green" }}>{message}</p>
+              <h3 className="text-center my-2" style={{ color: "#153448" }}>
+                Add Habit
+              </h3>
+              <p className="text-center" style={{ color: "#153448" }}>
+                {message}
+              </p>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                   <label>Description</label>
@@ -197,7 +218,11 @@ const AddShowHabits = () => {
                     className="form-control"
                     placeholder="Name of the Habit"
                     required
-                    style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.8)",
+                      color: "black",
+                      border: "2px solid white",
+                    }}
                   />
                 </div>
                 <div className="mb-3">
@@ -208,7 +233,11 @@ const AddShowHabits = () => {
                     className="form-control"
                     placeholder="Start Date"
                     required
-                    style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.8)",
+                      color: "black",
+                      border: "2px solid white",
+                    }}
                   />
                 </div>
                 <div className="mb-3">
@@ -218,11 +247,28 @@ const AddShowHabits = () => {
                     type="number"
                     className="form-control"
                     required
-                    style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
+                    style={{
+                      background: "rgba(255, 255, 255, 0.8)",
+                      color: "black",
+                      border: "2px solid white",
+                    }}
                   />
                 </div>
                 <div className="my-2 d-flex justify-content-center">
-                  <button type="submit" className="btn btn-primary" style={{ background: "#153448", color: "white", border: "1px", borderRadius: "4px", padding: "8px 30px", marginTop: "10px" }}>Submit</button>
+                  <button
+                    type="submit"
+                    className="btn btn-primary"
+                    style={{
+                      background: "#153448",
+                      color: "white",
+                      border: "1px",
+                      borderRadius: "4px",
+                      padding: "8px 30px",
+                      marginTop: "10px",
+                    }}
+                  >
+                    Submit
+                  </button>
                 </div>
               </form>
             </div>
@@ -231,22 +277,25 @@ const AddShowHabits = () => {
 
         <div className="col-md-6 mt-4">
           <div className="row">
-            {filteredHabits.map((habit) => (
-              <div className="col-md-6 mb-3" key={habit._id}>
-                <HabitCard
-                  habit={habit}
-                  streakCount={
-                    habitsStreakCount.find((item) => item.name === habit.name)
-                      ?.streakCount
-                  }
-                  deleteHabit={deleteHabit}
-                  textColor="black"
-                  deleteColor="red"
-                  updateColor="yellow"
-                  viewColor="blue"
-                />
-              </div>
-            ))}
+            {filteredHabits
+              .slice()
+              .reverse()
+              .map((habit) => (
+                <div className="col-md-6 mb-3" key={habit._id}>
+                  <HabitCard
+                    habit={habit}
+                    streakCount={
+                      habitsStreakCount.find((item) => item.name === habit.name)
+                        ?.streakCount
+                    }
+                    deleteHabit={deleteHabit}
+                    textColor="black"
+                    deleteColor="red"
+                    updateColor="yellow"
+                    viewColor="blue"
+                  />
+                </div>
+              ))}
           </div>
         </div>
       </div>

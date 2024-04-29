@@ -1,12 +1,12 @@
 body {
   font-family: Arial, sans-serif;
-  background: url("https://images.everydayhealth.com/images/news/consisten-exercise-helps-anxiety-and-stress-1440x810.jpg") no-repeat center center fixed;
+  background: url("https://images.everydayhealth.com/images/news/consisten-exercise-helps-anxiety-and-stress-1440x810.jpg")
+    no-repeat center center fixed;
   background-size: cover;
   animation: changeBackground 20s linear infinite;
 }
 
 @keyframes changeBackground {
-
   0%,
   100% {
     background-image: url("https://images.everydayhealth.com/images/news/consisten-exercise-helps-anxiety-and-stress-1440x810.jpg");
