@@ -32,10 +32,25 @@ const StreakCard = ({ streak, habitId }) => {
     );
   };
 
+  let backgroundColor = "";
+  let textColor = "white";
+  switch (status) {
+    case "Done":
+      backgroundColor = "green";
+      break;
+    case "Missed":
+      backgroundColor = "orange";
+      break;
+    default:
+      backgroundColor = "red";
+  }
+
   return (
     <div className="card">
       <h3>{streak.date}</h3>
-      <p>{status}</p>
+      <p>
+        <span style={{ backgroundColor, color: textColor, padding: "2px 5px", borderRadius: "3px" }}>{status}</span>
+      </p>
       {status !== "Done" && status !== "Missed" && isToday(streak.date) && (
         <button className="button" onClick={updateStatus}>
           Mark as Done

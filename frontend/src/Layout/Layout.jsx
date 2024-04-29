@@ -1,10 +1,14 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Navbar from "../Layout/Navbar"
 
 const Layout = () => {
   return (
-    <div className="container py-3">
-      <Outlet />
+    <div>
+      <Navbar />
+      <main>
+        <Outlet />
+      </main>
     </div>
   );
 };

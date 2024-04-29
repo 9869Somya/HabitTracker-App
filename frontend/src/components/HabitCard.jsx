@@ -45,7 +45,7 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
   }, [reloadPage]);
 
   return (
-    <div className="habit-card">
+    <div className="habit-card" style={{ backgroundColor: "white", color: "black", padding: "20px", borderRadius: "5px", boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)" }}>
       <div
         className={`habit-info ${
           parseInt(streakCount) === parseInt(frequency) ? "completed" : ""
@@ -66,21 +66,17 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
 
       {parseInt(streakCount) !== parseInt(frequency) && (
         <div className="habit-actions">
-          <Link to="#" onClick={handleShow}>
+          <Link to="#" onClick={handleShow} style={{ color: "orange", textDecoration: "none", fontWeight: "bold" }}>
             Update
           </Link>
-          <Link to={`habit/streakLogs/${_id}`}>View</Link>
-          <Link to="" onClick={handleDelete}>
-            Delete
-          </Link>
+          <Link to={`habit/streakLogs/${_id}`} style={{ color: "blue", textDecoration: "none", fontWeight: "bold" }}>View</Link>
+          <Link to="" onClick={handleDelete} style={{ color: "red", textDecoration: "none", fontWeight: "bold" }}>Delete</Link>
         </div>
       )}
 
       {parseInt(streakCount) === parseInt(frequency) && (
         <div className="habit-actions">
-          <Link to="#" onClick={handleDelete}>
-            Delete
-          </Link>
+          <Link to="#" onClick={handleDelete} style={{ color: "black", textDecoration: "none", fontWeight: "bold" }}>Delete</Link>
         </div>
       )}
 
@@ -96,6 +92,7 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
                 type="text"
                 placeholder="Enter habit name"
                 defaultValue={name}
+                style={{ backgroundColor: "white", color: "black" }}
               />
             </Form.Group>
             <Form.Group controlId="formHabitFrequency">
@@ -105,17 +102,14 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
                 placeholder="Enter frequency"
                 value={newFrequency}
                 onChange={handleFrequencyChange}
+                style={{ backgroundColor: "white", color: "black" }}
               />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleSave}>
-            Save Changes
-          </Button>
+          <Button variant="secondary" onClick={handleClose} style={{ backgroundColor: "white", color: "black" }}>Close</Button>
+          <Button variant="primary" onClick={handleSave} style={{ backgroundColor: "white", color: "black" }}>Save Changes</Button>
         </Modal.Footer>
       </Modal>
     </div>

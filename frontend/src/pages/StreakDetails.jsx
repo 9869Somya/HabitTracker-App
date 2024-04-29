@@ -17,18 +17,26 @@ const StreakDetails = () => {
     getStreakData(id);
   }, [id]);
 
-  if (!streaks) return;
+  if (!streaks) return null;
 
   return (
-    <div className="d-flex flex-wrap">
-      {streaks.map((streak) => (
-        <StreakCard key={streak._id} streak={streak} habitId={id} />
-      ))}
+    <div className="container">
+      <h1 className="text-center mt-5 mb-4" >
+        Make today count with daily habits
+      </h1>
+      <div className="row">
+        {streaks.map((streak) => (
+          <div className="col-md-3 mb-4" key={streak._id}>
+            <StreakCard streak={streak} habitId={id} />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
 
 export default StreakDetails;
+
 //
 
 // import React, { useState, useEffect } from "react";

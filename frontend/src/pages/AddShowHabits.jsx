@@ -24,7 +24,7 @@ const AddShowHabits = () => {
     console.log(newHabit);
     let res = await habitApiService.addHabit(newHabit);
     if (res.status) {
-      setMessage("Added Successfully");
+      setMessage("Added Successfully!!!");
       descriptionRef.current.value = "";
       dateRef.current.value = "";
       frequencyRef.current.value = "";
@@ -109,12 +109,10 @@ const AddShowHabits = () => {
             break;
           }
         }
-        // return `${streakCount}/${habitFrequency}`;
         return `${streakCount}`;
       }
     } catch (error) {
       console.error("Error:", error);
-      // return `0/0`;
       return `0`;
     }
   };
@@ -141,7 +139,6 @@ const AddShowHabits = () => {
       const response = await habitApiService.deleteHabit(habitId);
       if (response.status) {
         console.log("Habit deleted successfully");
-        // Refresh data after deletion
         getData();
       } else {
         console.error("Failed to delete habit");
@@ -158,45 +155,41 @@ const AddShowHabits = () => {
   );
 
   return (
-    <div className="container">
-      <div className="col-md-6 mx-auto ">
-        {/* Search*/}
-        <div className="mr-2">
+    <div className="container" style={{ minHeight: "100vh", padding: "20px", color: "black"}}>
+      <div className="row">
+        <div className="col-md-6">
           <input
             type="text"
             placeholder="Search habits"
             value={searchTerm}
             onChange={handleSearch}
             className="form-control"
+            style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
           />
         </div>
-        {/* Filter*/}
-        <div>
-          <label className="mr-1">Month</label>
+        <div className="col-md-6 text-right">
           <select
             value={selectedMonth}
             onChange={handleMonthChange}
             className="form-control"
+            style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
           >
             <option value="">All Months</option>
             {monthOptions.map((month) => (
-              <option key={month.value} value={month.value}>
-                {month.label}
-              </option>
+              <option key={month.value} value={month.value}>{month.label}</option>
             ))}
           </select>
         </div>
       </div>
 
-      {/* Habit Form */}
-      <div className="row">
-        <div className="col-md-6 mx-auto">
-          <div className="card" id="habit_form">
+      <div className="row mt-4">
+        <div className="col-md-6">
+          <div className="card" id="habit_form" style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}>
             <div className="card-body">
-              <h3 className="text-center my-2">Add Habit</h3>
-              <p className="text-center">{message}</p>
+              <h3 className="text-center my-2" style={{ color: "white" }}>Add Habit</h3>
+              <p className="text-center" style={{ color: "green" }}>{message}</p>
               <form onSubmit={handleSubmit}>
-                <div className="mb-1">
+                <div className="mb-3">
                   <label>Description</label>
                   <input
                     ref={descriptionRef}
@@ -204,9 +197,10 @@ const AddShowHabits = () => {
                     className="form-control"
                     placeholder="Name of the Habit"
                     required
+                    style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
                   />
                 </div>
-                <div className="mb-1">
+                <div className="mb-3">
                   <label>Date</label>
                   <input
                     ref={dateRef}
@@ -214,52 +208,46 @@ const AddShowHabits = () => {
                     className="form-control"
                     placeholder="Start Date"
                     required
+                    style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
                   />
                 </div>
-                <div className="mb-1">
+                <div className="mb-3">
                   <label>Frequency</label>
                   <input
                     ref={frequencyRef}
                     type="number"
                     className="form-control"
                     required
+                    style={{ background: "rgba(255, 255, 255, 0.8)", color: "black", border: "2px solid white" }}
                   />
                 </div>
-                <div className="my-2">
-                  <input type="submit" className="btn btn-primary w-100" />
+                <div className="my-2 d-flex justify-content-center">
+                  <button type="submit" className="btn btn-primary" style={{ background: "#153448", color: "white", border: "1px", borderRadius: "4px", padding: "8px 30px", marginTop: "10px" }}>Submit</button>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* All habits */}
-      <div className="row">
-        <div className="col-md mx-auto">
-          {searchTerm === ""
-            ? filteredHabits.map((habit) => (
+        <div className="col-md-6 mt-4">
+          <div className="row">
+            {filteredHabits.map((habit) => (
+              <div className="col-md-6 mb-3" key={habit._id}>
                 <HabitCard
-                  key={habit._id}
                   habit={habit}
                   streakCount={
                     habitsStreakCount.find((item) => item.name === habit.name)
                       ?.streakCount
                   }
                   deleteHabit={deleteHabit}
+                  textColor="black"
+                  deleteColor="red"
+                  updateColor="yellow"
+                  viewColor="blue"
                 />
-              ))
-            : filteredHabits.map((habit) => (
-                <HabitCard
-                  key={habit._id}
-                  habit={habit}
-                  streakCount={
-                    habitsStreakCount.find((item) => item.name === habit.name)
-                      ?.streakCount
-                  }
-                  deleteHabit={deleteHabit}
-                />
-              ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

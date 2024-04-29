@@ -6,6 +6,7 @@
   margin-bottom: 10px;
   background-color: rgb(255, 255, 255, 0.7);
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  opacity: 0.8;
 }
 
 .habit-actions {
@@ -26,28 +27,17 @@
   transition: background-color 0.3s;
 }
 
-.card:hover {
-  background-color: #ff9900;
-}
-
 .card h3 {
   color: #000000;
-}
-
-.card:hover h3 {
-  color: #ffffff;
 }
 
 .card p {
   color: black;
 }
 
-.card:hover {
-  background-color: #df83db;
-}
 
 .button {
-  background-color: #4caf50;
+  background-color: #153448;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -57,13 +47,37 @@
 }
 
 .button:hover {
-  background-color: #45a049;
+  background-color: #2C4E80;
 }
 
 /*AddHabit form css*/
 #habit_form {
-  background-color: rgba(157, 70, 228, 0.7);
+  background-color: transparent;
 }
 .mb-1 input {
   background-color: rgb(255, 255, 255, 0.7);
+}
+
+.container {
+  padding: 20px;
+}
+
+.row-cols-1 > .col {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 768px) {
+  .row-cols-md-4 > .col {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+}
+
+
+.card-body {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
