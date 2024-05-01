@@ -9,9 +9,8 @@ const Navbar = () => {
       <div className="container-fluid">
         {/* Logo */}
         <Link to="/" className="navbar-brand" style={{ color: "white" }}>
-  Habitiser
-</Link>
-
+          Habitiser
+        </Link>
 
         {/* Toggler button for small screens */}
         <button

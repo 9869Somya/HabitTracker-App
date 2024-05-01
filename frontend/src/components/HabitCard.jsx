@@ -95,7 +95,7 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
             Update
           </Link>
           <Link
-            to={`habit/streakLogs/${_id}`}
+            to={`/habits/habit/streakLogs/${_id}`}
             style={{
               color: "blue",
               textDecoration: "none",

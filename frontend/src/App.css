@@ -59,7 +59,7 @@
 #habit_form {
   background-color: rgba(255, 255, 255, 0.229);
   padding: 20px;
-  margin: 21px;
+  margin: 20px;
   margin-top: 22px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -90,4 +90,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* Homepage */
+.homePage {
+  background-color: #729cb9;
 }
