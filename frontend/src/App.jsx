@@ -5,6 +5,7 @@ import "./App.css";
 import AddShowHabits from "./pages/AddShowHabits";
 import Layout from "./Layout/Layout";
 import StreakDetails from "./pages/StreakDetails";
+import Home from "./pages/Home";
 
 function App() {
   const router = createBrowserRouter([
@@ -12,8 +13,10 @@ function App() {
       path: "/",
       element: <Layout />,
       children: [
-        { path: "/", element: <AddShowHabits /> },
+        { path: "/habit", element: <AddShowHabits /> },
         { path: "/habit/streakLogs/:id", element: <StreakDetails /> },
+        { path: "/", element: <Home /> }
+
       ],
     },
   ]);

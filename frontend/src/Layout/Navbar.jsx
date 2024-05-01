@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav
@@ -8,9 +8,10 @@ const Navbar = () => {
     >
       <div className="container-fluid">
         {/* Logo */}
-        <a className="navbar-brand" href="#" style={{ color: "white" }}>
-          Habitiser
-        </a>
+        <Link to="/" className="navbar-brand" style={{ color: "white" }}>
+  Habitiser
+</Link>
+
 
         {/* Toggler button for small screens */}
         <button
