@@ -12,14 +12,7 @@ const footerStyle = {
 function Footer() {
   return (
     <footer style={footerStyle}>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-      <p>&copy; 2024 Your Website. All Rights Reserved.</p>
+      
     </footer>
   );
 }

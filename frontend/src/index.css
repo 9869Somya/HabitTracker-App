@@ -24,3 +24,32 @@ body {
     background-image: url("https://miro.medium.com/v2/resize:fit:1400/1*BFS9oTnrShsV6ETUlEs8vQ.jpeg");
   }
 }
+
+/* .homePage {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  background-image: url('https://i.ibb.co/bdjPSpY/12223dd4-93c1-413d-9728-79be71b6e27f.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+} */
+
+/* .backgroundImage {
+  background: rgba(0, 0, 0, 0.7) url("HABITTRACKER-APP/s10.jpg");
+  background-blend-mode: darken;
+  height: 1000px;
+  position: relative;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+} */
+
+/* .backgroundImageContainer {
+  width: 200px;
+  height: 200px;
+  margin: 10px;
+  background-size: cover;
+  background-position: center;
+} */
+
