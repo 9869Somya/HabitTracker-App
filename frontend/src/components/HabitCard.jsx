@@ -4,9 +4,13 @@ import habitApiService from "../ApiService/HabitApiService";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { useAuth } from "../contexts/AuthContext";
 
 const HabitCard = ({ habit, streakCount, deleteHabit }) => {
   const { name, _id, frequency } = habit;
+  const authContext = useAuth();
+  const { user } = authContext;
+  const token = localStorage.getItem("pptoken");
 
   const [showModal, setShowModal] = useState(false);
   const [newFrequency, setNewFrequency] = useState(frequency);
@@ -17,9 +21,13 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
   };
   const handleSave = async () => {
     setShowModal(false);
-    const res = await habitApiService.updateHabit(_id, {
-      frequency: newFrequency,
-    });
+    const res = await habitApiService.updateHabit(
+      _id,
+      {
+        frequency: newFrequency,
+      },
+      token
+    );
     if (res.status) {
       console.log("Habit frequency updated successfully");
       setReloadPage(true);
@@ -35,7 +43,7 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
   };
 
   const handleDelete = () => {
-    deleteHabit(_id);
+    deleteHabit(_id, token);
   };
 
   useEffect(() => {

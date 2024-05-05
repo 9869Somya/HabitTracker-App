@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import habitApiService from "../ApiService/HabitApiService";
 import HabitCard from "../components/HabitCard";
+import { useAuth } from "../contexts/AuthContext";
 
 const AddShowHabits = () => {
+  const authContext = useAuth();
+  const { user, isLoggedIn } = authContext;
   const descriptionRef = useRef(null);
   const dateRef = useRef(null);
   const frequencyRef = useRef(null);
@@ -12,44 +15,49 @@ const AddShowHabits = () => {
   const [message, setMessage] = useState("");
   const [habitsStreakCount, setHabitsStreakCount] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
+  const token = localStorage.getItem("pptoken");
 
   async function handleSubmit(e) {
     e.preventDefault();
     setMessage("");
     const newHabit = {
+      userId: user.id,
       name: descriptionRef.current.value,
       startDate: dateRef.current.value,
       frequency: frequencyRef.current.value,
     };
     console.log(newHabit);
-    let res = await habitApiService.addHabit(newHabit);
+    let res = await habitApiService.addHabit(newHabit, token);
     if (res.status) {
       setMessage("Added Successfully!!!");
       descriptionRef.current.value = "";
       dateRef.current.value = "";
       frequencyRef.current.value = "";
-      getData();
+      getData(token);
     } else {
       setMessage("Error");
     }
   }
-
-  async function getData() {
-    let res = await habitApiService.allHabits();
+  console.log(user);
+  async function getData(token) {
+    let res = await habitApiService.allHabits(token);
     if (res.status) {
-      setHabits(res.data);
+      const userHabits = res.data.filter((habit) => habit.userId === user.id);
+      setHabits(userHabits);
     }
   }
 
   useEffect(() => {
-    getData();
-  }, []);
+    if (user) {
+      getData(token);
+    }
+  }, [token, user]);
 
   useEffect(() => {
-    const fetchHabitStreakCount = async () => {
+    const fetchHabitStreakCount = async (token) => {
       try {
         const streakCountPromises = habits.map(async (habit) => {
-          const streakCount = await getStreakCount(habit._id);
+          const streakCount = await getStreakCount(habit._id, token);
           return { name: habit.name, streakCount };
         });
         const streakCounts = await Promise.all(streakCountPromises);
@@ -59,7 +67,7 @@ const AddShowHabits = () => {
       }
     };
 
-    fetchHabitStreakCount();
+    fetchHabitStreakCount(token);
   }, [habits]);
 
   const handleSearch = (event) => {
@@ -70,12 +78,15 @@ const AddShowHabits = () => {
     setSelectedMonth(event.target.value);
   };
 
-  const getStreakCount = async (habitId) => {
+  const getStreakCount = async (habitId, token) => {
     try {
-      const response = await habitApiService.getStreakLogsById(habitId);
+      const response = await habitApiService.getStreakLogsById(habitId, token);
       if (response.status) {
         const streakLogs = response.data.streakLogs;
-        const frequency = await habitApiService.getHabitFrequencyById(habitId);
+        const frequency = await habitApiService.getHabitFrequencyById(
+          habitId,
+          token
+        );
         const habitFrequency = frequency.data.frequency;
         let streakCount = 0;
         let consecutiveDays = 0;
@@ -134,12 +145,12 @@ const AddShowHabits = () => {
     return { value: i + 1, label: month };
   });
 
-  const deleteHabit = async (habitId) => {
+  const deleteHabit = async (habitId, token) => {
     try {
-      const response = await habitApiService.deleteHabit(habitId);
+      const response = await habitApiService.deleteHabit(habitId, token);
       if (response.status) {
         console.log("Habit deleted successfully");
-        getData();
+        getData(token);
       } else {
         console.error("Failed to delete habit");
       }
@@ -159,41 +170,43 @@ const AddShowHabits = () => {
       className="container"
       style={{ minHeight: "100vh", padding: "20px", color: "black" }}
     >
-      <div className="row">
-        <div className="col-md-6">
-          <input
-            type="text"
-            placeholder="Search habits"
-            value={searchTerm}
-            onChange={handleSearch}
-            className="form-control"
-            style={{
-              background: "rgba(255, 255, 255, 0.8)",
-              color: "black",
-              border: "2px solid white",
-            }}
-          />
+      {isLoggedIn && (
+        <div className="row">
+          <div className="col-md-6">
+            <input
+              type="text"
+              placeholder="Search habits"
+              value={searchTerm}
+              onChange={handleSearch}
+              className="form-control"
+              style={{
+                background: "rgba(255, 255, 255, 0.8)",
+                color: "black",
+                border: "2px solid white",
+              }}
+            />
+          </div>
+          <div className="col-md-6 text-right">
+            <select
+              value={selectedMonth}
+              onChange={handleMonthChange}
+              className="form-control"
+              style={{
+                background: "rgba(255, 255, 255, 0.8)",
+                color: "black",
+                border: "2px solid white",
+              }}
+            >
+              <option value="">All Months</option>
+              {monthOptions.map((month) => (
+                <option key={month.value} value={month.value}>
+                  {month.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
-        <div className="col-md-6 text-right">
-          <select
-            value={selectedMonth}
-            onChange={handleMonthChange}
-            className="form-control"
-            style={{
-              background: "rgba(255, 255, 255, 0.8)",
-              color: "black",
-              border: "2px solid white",
-            }}
-          >
-            <option value="">All Months</option>
-            {monthOptions.map((month) => (
-              <option key={month.value} value={month.value}>
-                {month.label}
-              </option>
-            ))}
-          </select>
-        </div>
-      </div>
+      )}
 
       <div className="row mt-4">
         <div className="col-md-6">
@@ -288,7 +301,7 @@ const AddShowHabits = () => {
                       habitsStreakCount.find((item) => item.name === habit.name)
                         ?.streakCount
                     }
-                    deleteHabit={deleteHabit}
+                    deleteHabit={() => deleteHabit(habit._id, token)}
                     textColor="black"
                     deleteColor="red"
                     updateColor="yellow"

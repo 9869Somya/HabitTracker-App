@@ -4,9 +4,14 @@ class HabitApiService {
   constructor() {
     this.api = String(import.meta.env.VITE_BACKEND_API);
   }
-  async addHabit(habit) {
+  async addHabit(habit, token) {
     try {
-      const res = await axios.post(`${this.api}/habit`, habit);
+      const res = await axios.post(`${this.api}/habit`, habit, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res.data);
       return { data: res.data, status: true };
     } catch (error) {
@@ -15,9 +20,14 @@ class HabitApiService {
     }
   }
 
-  async allHabits() {
+  async allHabits(token) {
     try {
-      const res = await axios.get(this.api + "/habit");
+      const res = await axios.get(this.api + "/habit", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res.data);
       return { data: res.data, status: true };
     } catch (error) {
@@ -25,9 +35,14 @@ class HabitApiService {
       return { status: false };
     }
   }
-  async getStreakLogsById(id) {
+  async getStreakLogsById(id, token) {
     try {
-      const res = await axios.get(`${this.api}/habit/streakLogs/${id}`);
+      const res = await axios.get(`${this.api}/habit/streakLogs/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res.data);
       return { data: res.data, status: true };
     } catch (error) {
@@ -35,9 +50,14 @@ class HabitApiService {
       return { status: false };
     }
   }
-  async getHabitFrequencyById(id) {
+  async getHabitFrequencyById(id, token) {
     try {
-      const res = await axios.get(`${this.api}/habit/frequency/${id}`);
+      const res = await axios.get(`${this.api}/habit/frequency/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res.data);
       return { data: res.data, status: true };
     } catch (error) {
@@ -45,9 +65,14 @@ class HabitApiService {
       return { status: false };
     }
   }
-  async updateHabit(id, frequency) {
+  async updateHabit(id, frequency, token) {
     try {
-      const res = await axios.put(`${this.api}/habit/${id}`, frequency);
+      const res = await axios.put(`${this.api}/habit/${id}`, frequency, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
       console.log(res.data);
       return { data: res.data, status: true };
     } catch (error) {
@@ -55,9 +80,25 @@ class HabitApiService {
       return { status: false };
     }
   }
-  async deleteHabit(id) {
+  async deleteHabit(id, token) {
     try {
-      const res = await axios.delete(`${this.api}/habit/${id}`);
+      const res = await axios.delete(`${this.api}/habit/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.data);
+      return { data: res.data, status: true };
+    } catch (error) {
+      console.log(error);
+      return { status: false };
+    }
+  }
+  async updateStatus(id, date, token) {
+    try {
+      const res = await axios.put(`${this.api}/habit/streakLogs/${id}/${date}`);
+
       console.log(res.data);
       return { data: res.data, status: true };
     } catch (error) {

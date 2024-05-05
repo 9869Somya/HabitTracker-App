@@ -3,13 +3,14 @@ const Habit = require("../model/habit.model");
 
 async function addHabit(req, res) {
   try {
-    const { name, startDate, frequency } = req.body;
+    const { name, startDate, frequency, userId } = req.body;
     const startDateObj = new Date(startDate);
     const standardizedStartDate = startDateObj.toISOString().split("T")[0];
     const habit = new Habit({
       name,
       startDate: standardizedStartDate,
       frequency,
+      userId,
       streakLogs: [],
     });
     for (let i = 0; i < frequency; i++) {
@@ -44,7 +45,8 @@ function compensateMissedDate(habit) {
 
 async function allHabits(req, res) {
   try {
-    let habits = await Habit.find();
+    const userId = req.user.id; // Assuming the user ID is included in the authentication token payload
+    let habits = await Habit.find({ userId });
 
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
@@ -52,6 +54,10 @@ async function allHabits(req, res) {
 
     for (let i = 0; i < habits.length; i++) {
       const habit = habits[i];
+      if (!habit.userId) {
+        console.log(`Habit with ID ${habit._id} is missing userId`);
+        continue; // Skip this habit and move to the next one
+      }
       for (let j = 0; j < habit.streakLogs.length; j++) {
         const logDate = new Date(habit.streakLogs[j].date);
         const logStatus = habit.streakLogs[j].status;
@@ -251,7 +257,7 @@ async function getFrequencyById(req, res) {
 //triggered only when the user clicked on the checkbox to update the status
 async function updateStreakStatus(req, res) {
   const { habitId, date } = req.params;
-
+  console.log(req);
   try {
     const habit = await Habit.findById(habitId);
 

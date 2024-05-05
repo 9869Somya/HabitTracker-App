@@ -7,17 +7,18 @@ const StreakDetails = () => {
   const { id } = useParams();
   const [streaks, setStreaks] = useState([]);
   const [showMessage, setShowMessage] = useState(false);
+  const token = localStorage.getItem("pptoken");
 
-  async function getStreakData(id) {
-    let res = await habitApiService.getStreakLogsById(id);
+  async function getStreakData(id, token) {
+    let res = await habitApiService.getStreakLogsById(id, token);
     if (res.status) {
       setStreaks(res.data.streakLogs);
     }
   }
 
   useEffect(() => {
-    getStreakData(id);
-  }, [id]);
+    getStreakData(id, token);
+  }, [id, token]);
 
   if (!streaks) return null;
 

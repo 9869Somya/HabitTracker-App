@@ -11,16 +11,26 @@ const {
   getFrequencyById,
   updateStreakStatus,
 } = require("../controller/habit.controller");
+const authenticateUser = require("../middleware/auth.middleware");
 
 const habitRouter = express.Router();
-habitRouter.post("/", addHabit);
-habitRouter.get("/", allHabits);
-habitRouter.get("/:habitId", getHabitById);
-habitRouter.put("/:habitId", updateHabit);
-habitRouter.delete("/:habitId", deleteHabit);
-habitRouter.get("/streakLogs/:habitId", getStreakLogsById);
-habitRouter.get("/streakLogs/:habitId/:date", getHabitStatusByDate);
-habitRouter.get("/frequency/:habitId", getFrequencyById);
+habitRouter.post("/", authenticateUser, addHabit);
+habitRouter.get("/", authenticateUser, allHabits);
+habitRouter.get("/:habitId", authenticateUser, getHabitById);
+habitRouter.put("/:habitId", authenticateUser, updateHabit);
+habitRouter.delete("/:habitId", authenticateUser, deleteHabit);
+habitRouter.get("/streakLogs/:habitId", authenticateUser, getStreakLogsById);
+habitRouter.get(
+  "/streakLogs/:habitId/:date",
+  authenticateUser,
+  getHabitStatusByDate
+);
+habitRouter.get("/frequency/:habitId", authenticateUser, getFrequencyById);
+// habitRouter.put(
+//   "/streakLogs/:habitId/:date",
+//   authenticateUser,
+//   updateStreakStatus
+// );
 habitRouter.put("/streakLogs/:habitId/:date", updateStreakStatus);
 
 module.exports = habitRouter;

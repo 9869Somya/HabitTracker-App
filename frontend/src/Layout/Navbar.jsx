@@ -1,6 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 const Navbar = () => {
+  const authContext = useAuth();
+  const { isLoggedIn, logout, user } = authContext;
+  const logoutUser = () => {
+    logout();
+  };
   return (
     <nav
       className="navbar navbar-expand-lg"
@@ -29,38 +35,77 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav me-auto">{/* No items here */}</ul>
 
-          {/* Right-aligned dropdown for login and registration */}
-          <ul className="navbar-nav">
-            <li className="nav-item dropdown">
-              <a
-                className="nav-link dropdown-toggle"
-                href="#"
-                id="navbarDropdown"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                style={{ color: "white" }}
-              >
-                Account
-              </a>
-              <ul
-                className="dropdown-menu dropdown-menu-end"
-                aria-labelledby="navbarDropdown"
-                style={{ backgroundColor: "#153448" }}
-              >
-                <li>
-                  <a className="dropdown-item text-white" href="#">
-                    Login
-                  </a>
-                </li>
-                <li>
-                  <a className="dropdown-item text-white" href="#">
-                    Register
-                  </a>
+          {isLoggedIn ? (
+            <>
+              <ul className="navbar-nav">
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{ color: "white" }}
+                  >
+                    Welcome,{user.name}
+                  </Link>
+                  <ul
+                    className="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdown"
+                    style={{ backgroundColor: "#153448" }}
+                  >
+                    <li className="nav-item">
+                      <Link
+                        className="dropdown-item text-white"
+                        to="/"
+                        onClick={logoutUser}
+                      >
+                        Log out
+                      </Link>
+                    </li>
+                  </ul>
                 </li>
               </ul>
-            </li>
-          </ul>
+            </>
+          ) : (
+            <>
+              <ul className="navbar-nav">
+                <li className="nav-item dropdown">
+                  <Link
+                    className="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{ color: "white" }}
+                  >
+                    Account
+                  </Link>
+                  <ul
+                    className="dropdown-menu dropdown-menu-end"
+                    aria-labelledby="navbarDropdown"
+                    style={{ backgroundColor: "#153448" }}
+                  >
+                    <li>
+                      <Link className="dropdown-item text-white" to={`/login`}>
+                        Login
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        className="dropdown-item text-white"
+                        to={`/register`}
+                      >
+                        Register
+                      </Link>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </>
+          )}
         </div>
       </div>
       <style jsx>{`

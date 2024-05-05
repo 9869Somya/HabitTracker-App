@@ -3,6 +3,7 @@ const cors = require("cors");
 const dbConnect = require("./db/db");
 
 const habitRouter = require("./route/habit.router");
+const userRouter = require("./route/user.router");
 
 require("dotenv").config();
 
@@ -21,5 +22,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/habit", habitRouter);
+app.use("/user", userRouter);
 
 dbConnect();
