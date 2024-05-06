@@ -1,6 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const Home = () => {
+  const authContext = useAuth();
+  const { user, isLoggedIn } = authContext;
   return (
     <div className="homepage">
       <div className="background pt-3">
@@ -13,9 +17,13 @@ const Home = () => {
         </p>
         <br />
         <div className="d-flex justify-content-center">
-          <button type="button" className="btn btn-success">
-            Add Habit
-          </button>
+          {isLoggedIn && (
+            <>
+              <Link to={"/habits"} style={{ color: "white" }}>
+                Add Habit
+              </Link>
+            </>
+          )}
         </div>
         <br />
         <h1 className="text-center text-light">

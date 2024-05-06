@@ -246,6 +246,7 @@ const AddShowHabits = () => {
                     className="form-control"
                     placeholder="Start Date"
                     required
+                    // min={new Date().toISOString().split("T")[0]}
                     style={{
                       background: "rgba(255, 255, 255, 0.8)",
                       color: "black",
