@@ -104,7 +104,7 @@
 .homepage {
   background: rgba(0, 0, 0, 0.5) url("../src//assets/background\ \(2\).png");
   background-blend-mode: darken;
-  height: 1500px;
+  height: 1400px;
   position: relative;
   background-size: contain;
 }
