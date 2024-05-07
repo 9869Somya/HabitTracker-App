@@ -61,6 +61,16 @@
   -webkit-text-fill-color: transparent;
   font-weight: bolder;
 }
+#streak_header_habitName {
+  font-size: 72px;
+  background: -webkit-linear-gradient(rgb(12, 138, 241), #2bde1e);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+#streakCard {
+  margin-left: 35px;
+}
 
 /*AddHabit form css*/
 #habit_form {

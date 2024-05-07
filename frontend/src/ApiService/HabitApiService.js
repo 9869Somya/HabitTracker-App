@@ -35,6 +35,22 @@ class HabitApiService {
       return { status: false };
     }
   }
+
+  async getHabitById(id, token) {
+    try {
+      const res = await axios.get(`${this.api}/habit/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res);
+      return { data: res.data[0], status: true };
+    } catch (error) {
+      console.log(error);
+      return { status: false };
+    }
+  }
   async getStreakLogsById(id, token) {
     try {
       const res = await axios.get(`${this.api}/habit/streakLogs/${id}`, {

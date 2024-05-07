@@ -6,13 +6,19 @@ import StreakCard from "../components/StreakCard";
 const StreakDetails = () => {
   const { id } = useParams();
   const [streaks, setStreaks] = useState([]);
+  const [habitName, setHabitName] = useState("");
   const [showMessage, setShowMessage] = useState(false);
   const token = localStorage.getItem("pptoken");
 
   async function getStreakData(id, token) {
-    let res = await habitApiService.getStreakLogsById(id, token);
-    if (res.status) {
-      setStreaks(res.data.streakLogs);
+    let res1 = await habitApiService.getStreakLogsById(id, token);
+    if (res1.status) {
+      setStreaks(res1.data.streakLogs);
+    }
+    let res2 = await habitApiService.getHabitById(id, token);
+    if (res2.status) {
+      // setStreaks(res2.data.streakLogs);
+      setHabitName(res2.data.name);
     }
   }
 
@@ -51,9 +57,10 @@ const StreakDetails = () => {
           </div>
         )}
         <h1 className="text-center mt-5 mb-4" id="streak_header">
-          Daily Habit Streaks !!
+          Daily Habit Streaks of{" "}
+          <span id="streak_header_habitName">{habitName}</span>
         </h1>
-        <div className="row">
+        <div className="row" id="streakCard">
           {streaks.map((streak) => (
             <div className="col-md-3 mb-4" key={streak._id}>
               <StreakCard streak={streak} habitId={id} />
