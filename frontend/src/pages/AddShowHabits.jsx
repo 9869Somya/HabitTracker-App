@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import habitApiService from "../ApiService/HabitApiService";
 import HabitCard from "../components/HabitCard";
 import { useAuth } from "../contexts/AuthContext";
@@ -38,7 +40,7 @@ const AddShowHabits = () => {
       setMessage("Error");
     }
   }
-  console.log(user);
+
   async function getData(token) {
     let res = await habitApiService.allHabits(token);
     if (res.status) {
@@ -175,7 +177,7 @@ const AddShowHabits = () => {
           <div className="col-md-6">
             <input
               type="text"
-              placeholder="Search habits"
+              placeholder={`Search habits`}
               value={searchTerm}
               onChange={handleSearch}
               className="form-control"
@@ -183,6 +185,11 @@ const AddShowHabits = () => {
                 background: "rgba(255, 255, 255, 0.8)",
                 color: "black",
                 border: "2px solid white",
+                paddingLeft: "35px",
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23000' width='24px' height='24px'%3E%3Cpath d='M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z'/%3E%3C/svg%3E")`,
+                backgroundRepeat: "no-repeat",
+                backgroundPosition: "10px center",
+                backgroundSize: "20px",
               }}
             />
           </div>
@@ -246,7 +253,6 @@ const AddShowHabits = () => {
                     className="form-control"
                     placeholder="Start Date"
                     required
-                    // min={new Date().toISOString().split("T")[0]}
                     style={{
                       background: "rgba(255, 255, 255, 0.8)",
                       color: "black",
