@@ -9,6 +9,7 @@ import StreakDetails from "./pages/StreakDetails";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import ProtectedRoute from "./Layout/ProtectedRoute";
 
 function App() {
   const router = createBrowserRouter([
@@ -17,10 +18,21 @@ function App() {
       element: <Layout />,
       children: [
         { path: "/", element: <Home /> },
-        { path: "/habits", element: <AddShowHabits /> },
-        { path: "/habits/habit/streakLogs/:id", element: <StreakDetails /> },
+        // { path: "/habits", element: <AddShowHabits /> },
+        // { path: "/habits/habit/streakLogs/:id", element: <StreakDetails /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
+        {
+          path: "/",
+          element: <ProtectedRoute />,
+          children: [
+            { path: "/habits", element: <AddShowHabits /> },
+            {
+              path: "/habits/habit/streakLogs/:id",
+              element: <StreakDetails />,
+            },
+          ],
+        },
       ],
     },
   ]);
