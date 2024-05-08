@@ -158,22 +158,21 @@ const Register = () => {
                   }}
                 />
               </div>
-              <div className="my-1">
-                <input
+              <div className="my-2 d-flex justify-content-center">
+                <button
                   type="submit"
-                  value="Register"
-                  className="btn btn-primary w-100"
+                  className="btn btn-primary"
                   style={{
-                    borderRadius: "20px",
-                    fontSize: "20px",
-                    transition: "box-shadow 0.3s",
+                    background: "#153448",
+                    color: "white",
+                    border: "1px",
+                    borderRadius: "4px",
+                    padding: "8px 30px",
+                    marginTop: "10px",
                   }}
-                  onMouseOver={(e) =>
-                    (e.target.style.boxShadow =
-                      "0px 0px 10px 0px rgba(0,0,0,0.75)")
-                  }
-                  onMouseOut={(e) => (e.target.style.boxShadow = "none")}
-                />
+                >
+                  Register
+                </button>
               </div>
             </form>
           </div>
