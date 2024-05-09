@@ -150,7 +150,7 @@ const StreakDetails = () => {
                       Mark as Done
                     </button>
                   )}
-                <p>Streak: {calculateStreaks()[index]}</p>
+                <p className="hidden">Streak: {calculateStreaks()[index]}</p>
               </div>
             </div>
           ))}

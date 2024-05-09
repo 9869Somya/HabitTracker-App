@@ -1,6 +1,6 @@
 .streak-box-container {
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   overflow-x: auto;
   overflow-y: hidden;
@@ -12,6 +12,7 @@
   height: 15px;
   margin: 0 5px;
   border-radius: 50%;
+  padding: 1%;
 }
 
 .streak-box.done {
@@ -20,4 +21,7 @@
 
 .streak-box.not-done {
   background-color: red;
+}
+.hidden {
+  display: none;
 }
