@@ -1,0 +1,23 @@
+.streak-box-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: 3%;
+}
+
+.streak-box {
+  width: 15px;
+  height: 15px;
+  margin: 0 5px;
+  border-radius: 50%;
+}
+
+.streak-box.done {
+  background-color: green;
+}
+
+.streak-box.not-done {
+  background-color: red;
+}
