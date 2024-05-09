@@ -17,7 +17,6 @@ const StreakDetails = () => {
     }
     let res2 = await habitApiService.getHabitById(id, token);
     if (res2.status) {
-      // setStreaks(res2.data.streakLogs);
       setHabitName(res2.data.name);
     }
   }

@@ -12,8 +12,6 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [error, setError] = useState(false);
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -33,12 +31,11 @@ const Register = () => {
     const res = await userApiService.addUser(newUser);
     console.log(res);
     if (res.status) {
-      setMessage("Registeration Succesfull");
+      alert("Registeration Succesfull");
       navigate("/login");
     } else {
-      setMessage(res.message);
+      alert(res.message);
     }
-    setError(!res.status);
   };
   return (
     <div
@@ -70,7 +67,6 @@ const Register = () => {
             >
               Register
             </h3>
-            <p className={error ? "text-danger" : "text-success"}>{message}</p>
           </div>
           <div className="card-body">
             <form action="" method="post" onSubmit={handleSubmit}>
