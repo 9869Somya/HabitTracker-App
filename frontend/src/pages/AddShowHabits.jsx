@@ -4,6 +4,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import habitApiService from "../ApiService/HabitApiService";
 import HabitCard from "../components/HabitCard";
 import { useAuth } from "../contexts/AuthContext";
+import Chart from "chart.js/auto";
 
 const AddShowHabits = () => {
   const authContext = useAuth();
@@ -17,6 +18,8 @@ const AddShowHabits = () => {
   const [message, setMessage] = useState("");
   const [habitsStreakCount, setHabitsStreakCount] = useState([]);
   const [selectedMonth, setSelectedMonth] = useState("");
+  const [habitChartData, setHabitChartData] = useState(null);
+  const [chartInstance, setChartInstance] = useState(null);
   const token = localStorage.getItem("pptoken");
 
   async function handleSubmit(e) {
@@ -71,6 +74,35 @@ const AddShowHabits = () => {
 
     fetchHabitStreakCount(token);
   }, [habits]);
+
+  useEffect(() => {
+    if (habitsStreakCount.length > 0) {
+      const habitNames = habits.map((habit) => habit.name);
+      const streakCounts = habitsStreakCount.map((habit) => habit.streakCount);
+      const backgroundColors = Array.from(
+        { length: habits.length },
+        () =>
+          `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(
+            Math.random() * 256
+          )}, ${Math.floor(Math.random() * 256)}, 0.6)`
+      );
+
+      const chartData = {
+        labels: habitNames,
+        datasets: [
+          {
+            label: "Streak Count",
+            data: streakCounts,
+            backgroundColor: backgroundColors,
+            borderColor: "rgba(54, 162, 235, 1)",
+            borderWidth: 1,
+          },
+        ],
+      };
+
+      setHabitChartData(chartData);
+    }
+  }, [habitsStreakCount]);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -149,12 +181,18 @@ const AddShowHabits = () => {
 
   const deleteHabit = async (habitId, token) => {
     try {
-      const response = await habitApiService.deleteHabit(habitId, token);
-      if (response.status) {
-        console.log("Habit deleted successfully");
-        getData(token);
-      } else {
-        console.error("Failed to delete habit");
+      const isConfirmed = window.confirm(
+        "Are you sure you want to delete this habit?"
+      );
+      if (isConfirmed) {
+        const response = await habitApiService.deleteHabit(habitId, token);
+        if (response.status) {
+          console.log("Habit deleted successfully");
+          getData(token);
+          window.location.reload();
+        } else {
+          console.error("Failed to delete habit");
+        }
       }
     } catch (error) {
       console.error("Error:", error);
@@ -166,6 +204,38 @@ const AddShowHabits = () => {
       habit.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
+
+  useEffect(() => {
+    let newChartInstance = null;
+
+    if (habitChartData) {
+      if (chartInstance) {
+        console.log("Destroying previous chart instance");
+        chartInstance.destroy();
+      }
+      const ctx = document.getElementById("habitChart");
+      newChartInstance = new Chart(ctx, {
+        type: "bar",
+        data: habitChartData,
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      console.log("Setting new chart instance");
+      setChartInstance(newChartInstance);
+    }
+
+    return () => {
+      if (newChartInstance) {
+        console.log("Destroying new chart instance");
+        newChartInstance.destroy();
+      }
+    };
+  }, [habitChartData]);
 
   return (
     <div
@@ -215,110 +285,202 @@ const AddShowHabits = () => {
         </div>
       )}
 
-      <div className="row mt-4">
-        <div className="col-md-6">
-          <div
-            className="card"
-            id="habit_form"
-            style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}
-          >
-            <div className="card-body">
-              <h3 className="text-center my-2" style={{ color: "#153448" }}>
-                Add Habit
-              </h3>
-              <p className="text-center" style={{ color: "#153448" }}>
-                {message}
-              </p>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label>Description</label>
-                  <input
-                    ref={descriptionRef}
-                    type="text"
-                    className="form-control"
-                    placeholder="Name of the Habit"
-                    required
-                    style={{
-                      background: "rgba(255, 255, 255, 0.8)",
-                      color: "black",
-                      border: "2px solid white",
-                    }}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label>Date</label>
-                  <input
-                    ref={dateRef}
-                    type="date"
-                    className="form-control"
-                    placeholder="Start Date"
-                    required
-                    style={{
-                      background: "rgba(255, 255, 255, 0.8)",
-                      color: "black",
-                      border: "2px solid white",
-                    }}
-                  />
-                </div>
-                <div className="mb-3">
-                  <label>Frequency</label>
-                  <input
-                    ref={frequencyRef}
-                    type="number"
-                    className="form-control"
-                    required
-                    style={{
-                      background: "rgba(255, 255, 255, 0.8)",
-                      color: "black",
-                      border: "2px solid white",
-                    }}
-                  />
-                </div>
-                <div className="my-2 d-flex justify-content-center">
-                  <button
-                    type="submit"
-                    className="btn btn-primary"
-                    style={{
-                      background: "#153448",
-                      color: "white",
-                      border: "1px",
-                      borderRadius: "4px",
-                      padding: "8px 30px",
-                      marginTop: "10px",
-                    }}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </form>
+      {habits.length === 0 && (
+        <div className="row mt-4">
+          <div className="col-md-6">
+            <div
+              className="card"
+              id="habit_form"
+              style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+            >
+              <div className="card-body">
+                <h3 className="text-center my-2" style={{ color: "#153448" }}>
+                  Add Habit
+                </h3>
+                <p className="text-center" style={{ color: "#153448" }}>
+                  {message}
+                </p>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label>Description</label>
+                    <input
+                      ref={descriptionRef}
+                      type="text"
+                      className="form-control"
+                      placeholder="Name of the Habit"
+                      required
+                      style={{
+                        background: "rgba(255, 255, 255, 0.8)",
+                        color: "black",
+                        border: "2px solid white",
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label>Date</label>
+                    <input
+                      ref={dateRef}
+                      type="date"
+                      className="form-control"
+                      placeholder="Start Date"
+                      required
+                      style={{
+                        background: "rgba(255, 255, 255, 0.8)",
+                        color: "black",
+                        border: "2px solid white",
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label>Frequency</label>
+                    <input
+                      ref={frequencyRef}
+                      type="number"
+                      className="form-control"
+                      required
+                      style={{
+                        background: "rgba(255, 255, 255, 0.8)",
+                        color: "black",
+                        border: "2px solid white",
+                      }}
+                    />
+                  </div>
+                  <div className="my-2 d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{
+                        background: "#153448",
+                        color: "white",
+                        border: "1px",
+                        borderRadius: "4px",
+                        padding: "8px 30px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
+      )}
 
-        <div className="col-md-6 mt-4">
-          <div className="row">
-            {filteredHabits
-              .slice()
-              .reverse()
-              .map((habit) => (
-                <div className="col-md-6 mb-3" key={habit._id}>
-                  <HabitCard
-                    habit={habit}
-                    streakCount={
-                      habitsStreakCount.find((item) => item.name === habit.name)
-                        ?.streakCount
-                    }
-                    deleteHabit={() => deleteHabit(habit._id, token)}
-                    textColor="black"
-                    deleteColor="red"
-                    updateColor="yellow"
-                    viewColor="blue"
-                  />
-                </div>
-              ))}
-          </div>
+      <div className="row mt-4">
+        <div className="col">
+          <canvas id="habitChart" className="chart"></canvas>
         </div>
       </div>
+
+      {habits.length > 0 && (
+        <div className="row mt-4">
+          <div className="col-md-6">
+            <div
+              className="card"
+              id="habit_form"
+              style={{ boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.3)" }}
+            >
+              <div className="card-body">
+                <h3 className="text-center my-2" style={{ color: "#153448" }}>
+                  Add Habit
+                </h3>
+                <p className="text-center" style={{ color: "#153448" }}>
+                  {message}
+                </p>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <label>Description</label>
+                    <input
+                      ref={descriptionRef}
+                      type="text"
+                      className="form-control"
+                      placeholder="Name of the Habit"
+                      required
+                      style={{
+                        background: "rgba(255, 255, 255, 0.8)",
+                        color: "black",
+                        border: "2px solid white",
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label>Date</label>
+                    <input
+                      ref={dateRef}
+                      type="date"
+                      className="form-control"
+                      placeholder="Start Date"
+                      required
+                      style={{
+                        background: "rgba(255, 255, 255, 0.8)",
+                        color: "black",
+                        border: "2px solid white",
+                      }}
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <label>Frequency</label>
+                    <input
+                      ref={frequencyRef}
+                      type="number"
+                      className="form-control"
+                      required
+                      style={{
+                        background: "rgba(255, 255, 255, 0.8)",
+                        color: "black",
+                        border: "2px solid white",
+                      }}
+                    />
+                  </div>
+                  <div className="my-2 d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      className="btn btn-primary"
+                      style={{
+                        background: "#153448",
+                        color: "white",
+                        border: "1px",
+                        borderRadius: "4px",
+                        padding: "8px 30px",
+                        marginTop: "10px",
+                      }}
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div className="col-md-6 mt-4">
+            <div className="row">
+              {filteredHabits
+                .slice()
+                .reverse()
+                .map((habit) => (
+                  <div className="col-md-6 mb-3" key={habit._id}>
+                    <HabitCard
+                      habit={habit}
+                      streakCount={
+                        habitsStreakCount.find(
+                          (item) => item.name === habit.name
+                        )?.streakCount
+                      }
+                      deleteHabit={() => deleteHabit(habit._id, token)}
+                      textColor="black"
+                      deleteColor="red"
+                      updateColor="yellow"
+                      viewColor="blue"
+                    />
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

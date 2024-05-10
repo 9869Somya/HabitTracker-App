@@ -118,3 +118,11 @@
   position: relative;
   background-size: contain;
 }
+
+.chart {
+  width: 626px !important;
+  height: 313px !important;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
