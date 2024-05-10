@@ -45,26 +45,40 @@ const Home = () => {
           <div
             id="carouselExample"
             className="carousel slide"
-            style={{ width: "50%", margin: "0 4%" }}
+            style={{ width: "40%", margin: "0 4%" }}
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
                 <img
-                  src="https://www.hindustantimes.com/ht-img/img/2023/06/09/550x309/running_1686297363371_1686297373583.jpg"
+                  src="https://i.ibb.co/2jqqhsr/Screenshot-2024-05-11-010532.png"
                   className="d-block w-100"
                   alt="Jogging"
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="https://usa.bootcampcdn.com/wp-content/uploads/sites/108/2021/11/tes_gen_blog_post_071921_1171172626-800x412.jpg"
+                  src="https://i.ibb.co/M2zJ6YN/Screenshot-2024-05-11-010555.png"
                   className="d-block w-100"
                   alt="Coding"
                 />
               </div>
               <div className="carousel-item">
                 <img
-                  src="https://www.timeshighereducation.com/student/sites/default/files/styles/default/public/2022-01/iStock-622015126.jpg?itok=T446kMLS"
+                  src="https://i.ibb.co/68N485V/Screenshot-2024-05-11-010617.png"
+                  className="d-block w-100"
+                  alt="Studying"
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://i.ibb.co/Mn7zFkc/Screenshot-2024-05-11-010632.png"
+                  className="d-block w-100"
+                  alt="Studying"
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://i.ibb.co/HgY2DzM/Screenshot-2024-05-11-010645.png"
                   className="d-block w-100"
                   alt="Studying"
                 />
