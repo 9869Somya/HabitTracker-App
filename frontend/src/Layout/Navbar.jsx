@@ -1,6 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
+import { faSquareH } from "@fortawesome/free-solid-svg-icons"; // Import the solid square-h icon
+
 const Navbar = () => {
   const authContext = useAuth();
   const { isLoggedIn, logout, user } = authContext;
@@ -13,8 +16,14 @@ const Navbar = () => {
       style={{ backgroundColor: "#153448", padding: "10px 20px" }}
     >
       <div className="container-fluid">
-        {/* Logo */}
+        {/* Logo with FontAwesomeIcon */}
         <Link to="/" className="navbar-brand" style={{ color: "white" }}>
+          <FontAwesomeIcon
+            icon={faSquareH}
+            size="lg"
+            style={{ marginRight: "5px" }}
+          />{" "}
+          {/* Use FontAwesomeIcon with faSquareH icon and size="lg" */}
           Habitiser
         </Link>
 

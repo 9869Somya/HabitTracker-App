@@ -41,6 +41,77 @@ const Home = () => {
           on track for success. Here’s an example of how your day with our
           website could look:
         </p>
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <div
+            id="carouselExample"
+            className="carousel slide"
+            style={{ width: "50%", margin: "0 4%" }}
+          >
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img
+                  src="https://www.hindustantimes.com/ht-img/img/2023/06/09/550x309/running_1686297363371_1686297373583.jpg"
+                  className="d-block w-100"
+                  alt="Jogging"
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://usa.bootcampcdn.com/wp-content/uploads/sites/108/2021/11/tes_gen_blog_post_071921_1171172626-800x412.jpg"
+                  className="d-block w-100"
+                  alt="Coding"
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://www.timeshighereducation.com/student/sites/default/files/styles/default/public/2022-01/iStock-622015126.jpg?itok=T446kMLS"
+                  className="d-block w-100"
+                  alt="Studying"
+                />
+              </div>
+            </div>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
+          <div
+            className="text-light me-5"
+            style={{ width: "40%", margin: "0 4%" }}
+          >
+            {" "}
+            {/* Adjusted margin here */}
+            <h3>Turn Goals into Habits, Habits into Reality!</h3>
+            <p className="me-5">
+              With our habit tracker, streamline your routines effortlessly and
+              watch as small changes lead to big achievements. Start your
+              journey towards a better you today.
+            </p>
+          </div>
+        </div>
+        <h1 className="text-center text-light my-4">
+          Stay Empowered by Your Progress
+        </h1>
         <div className="d-flex justify-content-center py-3">
           <img
             src="https://assets-global.website-files.com/5d3aa39f8474c472841a7dfc/6480a0be71bc812f55132e88_Frame%20671.jpg"
@@ -54,54 +125,6 @@ const Home = () => {
             className="img-fluid ms-4"
             style={{ width: "400px", opacity: 0.8 }}
           />
-        </div>
-
-        <h1 className="text-center text-light my-4">
-          Stay Empowered by Your Progress
-        </h1>
-        <div className="d-flex justify-content-center mb-5">
-          <div className="card me-3 mb-5" style={{ width: "18rem" }}>
-            <img
-              src="https://www.pngmart.com/files/21/Exercise-PNG-Isolated-Free-Download.png"
-              className="card-img-top"
-              alt="Exercise"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Exercise</h5>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-          <div className="card mt-5 mx-5" style={{ width: "18rem" }}>
-            <img
-              src="https://www.pngmart.com/files/21/Exercise-PNG-Isolated-Free-Download.png"
-              className="card-img-top"
-              alt="Exercise"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Exercise</h5>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
-          <div className="card mb-5 ms-3" style={{ width: "18rem" }}>
-            <img
-              src="https://www.pngmart.com/files/21/Exercise-PNG-Isolated-Free-Download.png"
-              className="card-img-top"
-              alt="Exercise"
-            />
-            <div className="card-body">
-              <h5 className="card-title">Exercise</h5>
-              <p className="card-text">
-                Some quick example text to build on the card title and make up
-                the bulk of the card's content.
-              </p>
-            </div>
-          </div>
         </div>
       </div>
       <div className="my-5 text-light">
