@@ -69,7 +69,7 @@ const StreakDetails = () => {
   if (!streaks) return null;
 
   return (
-    <div style={{ background: "rgba(0, 0, 0, 0.5)" }}>
+    <div style={{ background: "rgba(0, 0, 0, 0.5)" }} className="pb-5">
       <div className="mb-4">
         <button
           className="btn btn-sm btn-light"

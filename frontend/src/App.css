@@ -112,22 +112,24 @@
 
 /* Homepage */
 .homepage {
-  background: rgba(0, 0, 0, 0.8) url("../src//assets/background\ \(2\).png");
+  background: rgba(0, 0, 0, 0.5) url("../src//assets/background\ \(2\).png");
   background-blend-mode: darken;
-  height: 1200px;
+  height: 1400px;
   position: relative;
   background-size: contain;
 }
-
 .chart {
   width: 626px !important;
   height: 313px !important;
   display: block;
   margin-left: auto;
   margin-right: auto;
+  background-color: rgba(255, 255, 255, 0.855) !important;
+  padding: 2%;
+  border-radius: 8px;
 }
 
 .carousel-item img {
-  height: 300px; /* Adjust the height as needed */
-  object-fit: cover; /* Ensure the image covers the entire container */
+  height: 350px;
+  object-fit: cover;
 }

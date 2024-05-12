@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import habitApiService from "../ApiService/HabitApiService";
 import HabitCard from "../components/HabitCard";
 import { useAuth } from "../contexts/AuthContext";
@@ -84,7 +84,7 @@ const AddShowHabits = () => {
         () =>
           `rgba(${Math.floor(Math.random() * 256)}, ${Math.floor(
             Math.random() * 256
-          )}, ${Math.floor(Math.random() * 256)}, 0.6)`
+          )}, ${Math.floor(Math.random() * 256)}, 0.8)`
       );
 
       const chartData = {
@@ -368,11 +368,13 @@ const AddShowHabits = () => {
         </div>
       )}
 
-      <div className="row mt-4">
-        <div className="col">
-          <canvas id="habitChart" className="chart"></canvas>
+      {habits.length > 0 && (
+        <div className="row mt-4" id="chartDiv">
+          <div className="col">
+            <canvas id="habitChart" className="chart"></canvas>
+          </div>
         </div>
-      </div>
+      )}
 
       {habits.length > 0 && (
         <div className="row mt-4">

@@ -123,9 +123,10 @@ const Home = () => {
             </p>
           </div>
         </div>
+        {/* <div class="overlay"></div> */}
       </div>
       {/* Added container for the icons */}
-      <div className="px-5 py-5" style={{ backgroundColor: "#ffec9e" }}>
+      <div className="px-5 py-5 mt-5" style={{ backgroundColor: "#ffec9e" }}>
         <h2
           className="text-center pb-4"
           style={{ color: "#153448", fontSize: "2rem" }}
@@ -196,7 +197,7 @@ const Home = () => {
       </div>
 
       <div className=" text-light">
-        <footer style={{ backgroundColor: "#153448" }}>
+        <footer className=" px-5 py-5" style={{ backgroundColor: "#153448" }}>
           <div className="container p-4">
             <div className="row">
               <div className="col-lg-5 col-md-12 mt-3">

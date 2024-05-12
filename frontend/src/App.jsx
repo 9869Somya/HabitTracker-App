@@ -18,8 +18,6 @@ function App() {
       element: <Layout />,
       children: [
         { path: "/", element: <Home /> },
-        // { path: "/habits", element: <AddShowHabits /> },
-        // { path: "/habits/habit/streakLogs/:id", element: <StreakDetails /> },
         { path: "/login", element: <Login /> },
         { path: "/register", element: <Register /> },
         {
