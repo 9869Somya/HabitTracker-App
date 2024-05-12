@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { Button } from "react-bootstrap"; // Import Button component from react-bootstrap
+import { Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Home = () => {
   const authContext = useAuth();
@@ -20,7 +22,6 @@ const Home = () => {
         <div className="d-flex justify-content-center">
           {isLoggedIn && (
             <>
-              {/* Replace Link with Button */}
               <Button variant="success">
                 <Link
                   to={"/habits"}
@@ -33,6 +34,121 @@ const Home = () => {
           )}
         </div>
         <br />
+        <div className="d-flex justify-content-between align-items-center mb-3">
+          <div
+            className="text-light me-5"
+            style={{ width: "40%", margin: "0 4%" }}
+          >
+            <h3>Sample Habits for a Healthier Lifestyle</h3>
+            <p className="me-5 mt-3">
+              Explore these simple habits to enrich your daily routine: from
+              staying hydrated to taking short breaks for stretching, each small
+              change can lead to a healthier you.
+            </p>
+          </div>
+          <div
+            id="carouselExampleIndicators"
+            className="carousel slide mx-5 my-5"
+            style={{ width: "50%", margin: "0 auto" }}
+            data-bs-ride="carousel"
+          >
+            <div className="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="0"
+                className="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="3"
+                aria-label="Slide 4"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carouselExampleIndicators"
+                data-bs-slide-to="4"
+                aria-label="Slide 5"
+              ></button>
+            </div>
+            <div className="carousel-inner">
+              <div className="carousel-item active">
+                <img
+                  src="https://www.eatthis.com/wp-content/uploads/sites/4/2022/05/woman-jogging-bridge-e1652818996620.jpg?quality=82&strip=1"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://www.approachablemusic.com/images/longform-images/the-3-levels-of-guitar-proficiency.jpg"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://blog.smartabroad.in/wp-content/uploads/2022/08/studying-student-on-desk.jpg"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://i0.wp.com/nenow.in/wp-content/uploads/2022/06/Drinking-too-much-of-water.jpg?fit=1200%2C675&ssl=1"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+              <div className="carousel-item">
+                <img
+                  src="https://assets-varnish.triblive.com/2021/09/4249436_web1_web-weights.jpg"
+                  className="d-block w-100"
+                  alt="..."
+                />
+              </div>
+            </div>
+            <button
+              className="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="prev"
+            >
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Previous</span>
+            </button>
+            <button
+              className="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide="next"
+            >
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+              <span className="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
         <h1 className="text-center text-light">
           Organize your chaos, execute your plan, and triumph over adversity.
         </h1>
@@ -46,6 +162,7 @@ const Home = () => {
             id="carouselExample"
             className="carousel slide"
             style={{ width: "40%", margin: "0 4%" }}
+            data-bs-ride="carousel"
           >
             <div className="carousel-inner">
               <div className="carousel-item active">
@@ -113,8 +230,6 @@ const Home = () => {
             className="text-light me-5"
             style={{ width: "40%", margin: "0 4%" }}
           >
-            {" "}
-            {/* Adjusted margin here */}
             <h3>Turn Goals into Habits, Habits into Reality!</h3>
             <p className="me-5">
               With our habit tracker, streamline your routines effortlessly and
@@ -123,25 +238,81 @@ const Home = () => {
             </p>
           </div>
         </div>
-        <h1 className="text-center text-light my-4">
-          Stay Empowered by Your Progress
-        </h1>
-        <div className="d-flex justify-content-center py-3">
-          <img
-            src="https://assets-global.website-files.com/5d3aa39f8474c472841a7dfc/6480a0be71bc812f55132e88_Frame%20671.jpg"
-            alt="Image 1"
-            className="img-fluid me-4"
-            style={{ width: "400px", opacity: 0.8 }}
-          />
-          <img
-            src="https://assets-global.website-files.com/5d3aa39f8474c472841a7dfc/6480a277275ec417eb65c134_Frame%20678.jpg"
-            alt="Image 2"
-            className="img-fluid ms-4"
-            style={{ width: "400px", opacity: 0.8 }}
-          />
+      </div>
+      {/* Added container for the icons */}
+      <div className="px-5 py-5" style={{ backgroundColor: "#ffec9e" }}>
+        <h2 className="text-center pb-4" style={{ color: "#153448" }}>
+          Our Members
+        </h2>
+        <div className="d-flex justify-content-between align-items-center ps-4 pe-4">
+          {/* Icon container 1 */}
+          <div className="icon-container square d-flex flex-column justify-content-center align-items-center px-5 py-4">
+            {/* Icon */}
+            <FontAwesomeIcon
+              icon={faUser}
+              size="3x"
+              style={{ color: "#153448" }}
+            />
+            {/* Tile */}
+            <div
+              className="icon-title text-center mt-2"
+              style={{ color: "#153448" }}
+            >
+              Somya Parida
+            </div>
+          </div>
+          {/* Icon container 2 */}
+          <div className="icon-container square d-flex flex-column justify-content-center align-items-center px-5 py-4">
+            {/* Icon */}
+            <FontAwesomeIcon
+              icon={faUser}
+              size="3x"
+              style={{ color: "#153448" }}
+            />
+            {/* Tile */}
+            <div
+              className="icon-title text-center mt-2"
+              style={{ color: "#153448" }}
+            >
+              Ananya Das
+            </div>
+          </div>
+          {/* Icon container 3 */}
+          <div className="icon-container square d-flex flex-column justify-content-center align-items-center px-5 py-4">
+            {/* Icon */}
+            <FontAwesomeIcon
+              icon={faUser}
+              size="3x"
+              style={{ color: "#153448" }}
+            />
+            {/* Tile */}
+            <div
+              className="icon-title text-center mt-2"
+              style={{ color: "#153448" }}
+            >
+              Sonal Patra
+            </div>
+          </div>
+          {/* Icon container 4 */}
+          <div className="icon-container square d-flex flex-column justify-content-center align-items-center px-4 py-4">
+            {/* Icon */}
+            <FontAwesomeIcon
+              icon={faUser}
+              size="3x"
+              style={{ color: "#153448" }}
+            />
+            {/* Tile */}
+            <div
+              className="icon-title text-center mt-2"
+              style={{ color: "#153448" }}
+            >
+              Abhipsa Acharya
+            </div>
+          </div>
         </div>
       </div>
-      <div className="my-5 text-light">
+
+      <div className=" text-light">
         <footer style={{ backgroundColor: "#153448" }}>
           <div className="container p-4">
             <div className="row">
