@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const addUser = async (req, res) => {
   try {
     let user = req.body;
-    // console.log(user);
+
     let { name, email, password } = user;
 
     let extUser = await UserModel.findOne({ email: email });
@@ -14,7 +14,7 @@ const addUser = async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
-    // console.log(password);
+
     user = await UserModel.create({
       name: name,
       email: email,
