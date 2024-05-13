@@ -26,11 +26,6 @@ habitRouter.get(
   getHabitStatusByDate
 );
 habitRouter.get("/frequency/:habitId", authenticateUser, getFrequencyById);
-// habitRouter.put(
-//   "/streakLogs/:habitId/:date",
-//   authenticateUser,
-//   updateStreakStatus
-// );
 habitRouter.put("/streakLogs/:habitId/:date", updateStreakStatus);
 
 module.exports = habitRouter;

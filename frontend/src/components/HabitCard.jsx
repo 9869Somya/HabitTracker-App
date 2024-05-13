@@ -81,7 +81,6 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
             style={{
               color: "green",
               textDecoration: "none",
-              // fontWeight: "bold",
             }}
           >
             Congratulations! Habit completed!

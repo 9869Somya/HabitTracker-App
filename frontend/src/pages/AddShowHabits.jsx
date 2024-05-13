@@ -25,6 +25,11 @@ const AddShowHabits = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     setMessage("");
+    const frequencyValue = parseInt(frequencyRef.current.value);
+    if (frequencyValue < 0) {
+      alert("Frequency cannot be negative.");
+      return;
+    }
     const newHabit = {
       userId: user.id,
       name: descriptionRef.current.value,

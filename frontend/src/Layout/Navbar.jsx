@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"; // Import FontAwesomeIcon
-import { faSquareH } from "@fortawesome/free-solid-svg-icons"; // Import the solid square-h icon
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSquareH } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const authContext = useAuth();
@@ -16,18 +16,15 @@ const Navbar = () => {
       style={{ backgroundColor: "#153448", padding: "10px 20px" }}
     >
       <div className="container-fluid">
-        {/* Logo with FontAwesomeIcon */}
         <Link to="/" className="navbar-brand" style={{ color: "white" }}>
           <FontAwesomeIcon
             icon={faSquareH}
             size="lg"
             style={{ marginRight: "5px" }}
           />{" "}
-          {/* Use FontAwesomeIcon with faSquareH icon and size="lg" */}
           Habitiser
         </Link>
 
-        {/* Toggler button for small screens */}
         <button
           className="navbar-toggler"
           type="button"
@@ -40,9 +37,8 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Navbar items */}
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">{/* No items here */}</ul>
+          <ul className="navbar-nav me-auto"></ul>
 
           {isLoggedIn ? (
             <>
@@ -67,7 +63,7 @@ const Navbar = () => {
                     <li className="nav-item">
                       <Link
                         className="dropdown-item text-white"
-                        to="/"
+                        to="/login"
                         onClick={logoutUser}
                       >
                         Log out
@@ -117,7 +113,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .dropdown-item:hover {
           color: #ffec9e !important; /* Change text color on hover */
           background-color: #153448 !important; /* Keep background color */
