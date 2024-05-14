@@ -45,18 +45,17 @@ function compensateMissedDate(habit) {
 
 async function allHabits(req, res) {
   try {
-    const userId = req.user.id; // Assuming the user ID is included in the authentication token payload
+    const userId = req.user.id;
     let habits = await Habit.find({ userId });
 
     const today = new Date();
     today.setUTCHours(0, 0, 0, 0);
-    // console.log(today);
 
     for (let i = 0; i < habits.length; i++) {
       const habit = habits[i];
       if (!habit.userId) {
         console.log(`Habit with ID ${habit._id} is missing userId`);
-        continue; // Skip this habit and move to the next one
+        continue;
       }
       for (let j = 0; j < habit.streakLogs.length; j++) {
         const logDate = new Date(habit.streakLogs[j].date);

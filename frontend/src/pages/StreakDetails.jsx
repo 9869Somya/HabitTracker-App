@@ -78,7 +78,8 @@ const StreakDetails = () => {
             width: "15%",
             backgroundColor: "#088F8F",
             color: "white",
-            padding: "10px",
+            padding: "5px",
+            fontSize: "20px",
           }}
         >
           {showMessage ? "Hide tip" : "Show tip"}

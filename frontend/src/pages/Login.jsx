@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import userApiService from "../ApiService/UserApiService";
 import { useState } from "react";
 import { useAuth } from "../contexts/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import usernameIcon from "../assets/person.png";
 import emailIcon from "../assets/email.png";
@@ -32,9 +32,9 @@ const Login = () => {
     };
     const res = await userApiService.loginUser(user);
     if (res.status) {
-      alert("LoggedIn succesfully");
       login(res.data.token);
       navigate("/habits");
+      alert("LoggedIn succesfully");
     } else {
       alert(res.message);
     }
@@ -128,6 +128,12 @@ const Login = () => {
                   }}
                 />
               </div>
+              <p className="px-3" style={{ fontWeight: "bolder" }}>
+                Don't you have an account?{" "}
+                <Link to={"/register"} style={{ textDecoration: "none" }}>
+                  Register Now
+                </Link>
+              </p>
               <div className="my-2 d-flex justify-content-center">
                 <button
                   type="submit"

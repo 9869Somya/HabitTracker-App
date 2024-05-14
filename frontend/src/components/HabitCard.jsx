@@ -20,6 +20,10 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
     setShowModal(false);
   };
   const handleSave = async () => {
+    if (parseInt(newFrequency) < parseInt(frequency)) {
+      alert("New frequency cannot be less than the current frequency.");
+      return;
+    }
     setShowModal(false);
     const res = await habitApiService.updateHabit(
       _id,
@@ -147,8 +151,8 @@ const HabitCard = ({ habit, streakCount, deleteHabit }) => {
               <Form.Label>Habit Name</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Enter habit name"
                 defaultValue={name}
+                readOnly
                 style={{ backgroundColor: "white", color: "black" }}
               />
             </Form.Group>

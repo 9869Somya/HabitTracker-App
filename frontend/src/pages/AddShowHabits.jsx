@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// import { faSearch } from "@fortawesome/free-solid-svg-icons";
+
 import habitApiService from "../ApiService/HabitApiService";
 import HabitCard from "../components/HabitCard";
 import { useAuth } from "../contexts/AuthContext";
@@ -329,6 +328,7 @@ const AddShowHabits = () => {
                       className="form-control"
                       placeholder="Start Date"
                       required
+                      min={new Date().toISOString().split("T")[0]}
                       style={{
                         background: "rgba(255, 255, 255, 0.8)",
                         color: "black",
@@ -420,6 +420,7 @@ const AddShowHabits = () => {
                       className="form-control"
                       placeholder="Start Date"
                       required
+                      min={new Date().toISOString().split("T")[0]}
                       style={{
                         background: "rgba(255, 255, 255, 0.8)",
                         color: "black",
