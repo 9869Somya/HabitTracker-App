@@ -7,6 +7,11 @@ const addUser = async (req, res) => {
     let user = req.body;
 
     let { name, email, password } = user;
+    if (password.length < 4) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 4 characters long" });
+    }
 
     let extUser = await UserModel.findOne({ email: email });
     if (extUser) {
