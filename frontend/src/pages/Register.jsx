@@ -5,7 +5,7 @@ import userApiService from "../ApiService/UserApiService";
 import usernameIcon from "../assets/person.png";
 import emailIcon from "../assets/email.png";
 import passwordIcon from "../assets/password.png";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -154,6 +154,12 @@ const Register = () => {
                   }}
                 />
               </div>
+              <p className="px-3" style={{ fontWeight: "bolder" }}>
+                Existing User?{" "}
+                <Link to={"/login"} style={{ textDecoration: "none" }}>
+                  Login
+                </Link>
+              </p>
               <div className="my-2 d-flex justify-content-center">
                 <button
                   type="submit"

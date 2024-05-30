@@ -5,8 +5,13 @@ const jwt = require("jsonwebtoken");
 const addUser = async (req, res) => {
   try {
     let user = req.body;
-    // console.log(user);
+
     let { name, email, password } = user;
+    if (password.length < 4) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 4 characters long" });
+    }
 
     let extUser = await UserModel.findOne({ email: email });
     if (extUser) {
@@ -14,7 +19,7 @@ const addUser = async (req, res) => {
     }
     const salt = await bcrypt.genSalt(10);
     password = await bcrypt.hash(password, salt);
-    // console.log(password);
+
     user = await UserModel.create({
       name: name,
       email: email,
