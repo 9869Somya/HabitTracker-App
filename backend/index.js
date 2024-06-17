@@ -11,7 +11,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://habit-tracker-1whq.vercel.app"],
+    origin: [""],
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
