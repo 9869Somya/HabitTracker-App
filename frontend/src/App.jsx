@@ -10,8 +10,10 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import ProtectedRoute from "./Layout/ProtectedRoute";
+import axios from "axios";
 
 function App() {
+  axios.defaults.withCredentials = true;
   const router = createBrowserRouter([
     {
       path: "/",
