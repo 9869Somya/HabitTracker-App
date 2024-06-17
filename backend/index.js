@@ -9,7 +9,13 @@ require("dotenv").config();
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://habit-tracker-1whq.vercel.app"],
+    methods: ["POST", "GET", "DELETE", "PUT"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
