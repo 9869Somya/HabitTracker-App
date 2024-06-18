@@ -13,7 +13,6 @@ import ProtectedRoute from "./Layout/ProtectedRoute";
 import axios from "axios";
 
 function App() {
-  axios.defaults.withCredentials = true;
   const router = createBrowserRouter([
     {
       path: "/",
