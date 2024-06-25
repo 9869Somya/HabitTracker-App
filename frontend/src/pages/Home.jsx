@@ -195,8 +195,73 @@ const Home = () => {
           </div>
         </div>
       </div> */}
+      <section class="full-height mb-5" id="contact">
+        <div class="container">
+          <div class="row justify-content-center text-center pb-4">
+            <div class="col-lg-8">
+              <h1 className="text-center text-light">
+                Contact Us
+              </h1>
+              <p className="text-center text-light pb-4 lead">
+                Whether you have a question or just want to say hi, We would love to
+                hear from you.
+              </p>
+            </div>
+            <div class="col-lg-8">
+              <form class="row g-lg-3 gy-3" method="get">
+                <div class="form-group col-md-6">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    id="name"
+                    placeholder="Name"
+                  />
+                  <label class="error" id="nameError"></label>
+                </div>
+                <div class="form-group col-md-6">
+                  <input
+                    type="tel"
+                    class="form-control"
+                    name="mobile"
+                    id="mobile"
+                    placeholder="Mobile"
+                  />
+                  <label class="error" id="mobileError"></label>
+                </div>
+                <div class="form-group col-12">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="email"
+                    id="email"
+                    placeholder="Email"
+                  />
+                  <label class="error" id="emailError"></label>
+                </div>
+                <div class="form-group col-12">
+                  <textarea
+                    name=""
+                    rows="4"
+                    class="form-control"
+                    id="message"
+                    placeholder="Message"
+                  ></textarea>
+                  <label class="error" id="messageError"></label>
+                </div>
+                <button
+                  class="btn btn-primary rounded-pill fs-4"
+                  onclick="sendMail(event)"
+                >
+                  Contact me
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <div className=" text-light">
+      <div className=" text-light mb-0">
         <footer className=" px-5 py-5" style={{ backgroundColor: "#153448" }}>
           <div className="container p-4">
             <div className="row">
